@@ -27,7 +27,7 @@ void loop() {
   int h = hour(t);
   Serial.println(h);
 
-  if(h >= 6 && h <= 19) { 
+  if(h >= 5 && h <= 21) { 
     if (isOn == false) {
       digitalWrite(pinOut, HIGH);
     }
