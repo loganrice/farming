@@ -1,4 +1,9 @@
 # Rules
-* turn on - if room temp > 70F
-* turn off - if room temp < 65
-* wait - if turned off wait for 5 minutes before turning on again
+* Cycle AC 20 minutes on 10 minutes off
+* turn on (start cycle) - if room temp > 70F
+* turn off (stop cycle) - if room temp < 65
+
+Equipment
+* Arduino UNO
+* Relay
+* Temperature sensor
