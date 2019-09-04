@@ -1,3 +1,15 @@
+#include <Time.h>
+#include <TimeLib.h>
+
+
+int HOUR = 1;
+int MINUTE = 12;
+int SECOND = 00;
+int DAY = 22;
+int MONTH = 7;
+int YEAR = 2019;
+
+
 unsigned long startMillis;
 unsigned long currentMillis;
 
@@ -11,6 +23,7 @@ boolean isOn = false;
 boolean isWaiting = false; // used to toggle between on mode and rest mode
 
 void setup() {
+  setTime(HOUR, MINUTE, SECOND, DAY, MONTH, YEAR);
   startMillis = millis();
   Serial.begin(9600);  
   Serial.println("--- Start Serial Monitor SEND_RCVE ---");
@@ -21,18 +34,23 @@ void setup() {
 
 void loop() {
   currentMillis = millis();
+  time_t t = now();
+  int h = hour(t);
 
-  if (currentMillis - startMillis >= runPeriod) {
-    startMillis = currentMillis;
-    powerOff();
-  } else {
-    if (isWaiting) {
-      if (currentMillis - startMillis >= offPeriod) {
-        isWaiting = false;
-        startMillis = currentMillis;
-      }
+  if(h >= 8 && h <= 21) { 
+ 
+    if (currentMillis - startMillis >= runPeriod) {
+      startMillis = currentMillis;
+      powerOff();
     } else {
-      powerOn();
+      if (isWaiting) {
+        if (currentMillis - startMillis >= offPeriod) {
+          isWaiting = false;
+          startMillis = currentMillis;
+        }
+      } else {
+        powerOn();
+      }
     }
   }
 }

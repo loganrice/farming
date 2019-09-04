@@ -1,15 +1,22 @@
 #include <Time.h>
 #include <TimeLib.h>
 
+#include <Time.h>
+#include <TimeLib.h>
 
-int HOUR = 16;
-int MINUTE = 45;
-int SECOND = 00;
-int DAY = 31;
-int MONTH = 5;
+
+int HOUR = 20;
+int MINUTE = 20;
+int SECOND = 0;
+int DAY = 3;
+int MONTH = 9;
 int YEAR = 2019;
+int startHour = 5;
+int endHour = 23;
+//int startHour = 13;
+//int endHour = 14;
 
-int pinOut = 7;
+int pinOut = 10;
 
 boolean isOn = false;
 
@@ -27,7 +34,7 @@ void loop() {
   int h = hour(t);
   Serial.println(h);
 
-  if(h >= 5 && h <= 21) { 
+  if(h >= startHour && h < endHour) { 
     if (isOn == false) {
       digitalWrite(pinOut, HIGH);
     }
@@ -36,9 +43,10 @@ void loop() {
   } else {
     if (isOn == true) {
       digitalWrite(pinOut, LOW);
+      Serial.println("Lights Off");
     }
     isOn = false;
-    Serial.println("Lights Off"); 
+     
   }
   
   delay(10000);
